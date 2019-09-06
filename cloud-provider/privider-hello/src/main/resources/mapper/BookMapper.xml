@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.nanfeng.mapper.BookMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.nanfeng.model.po.Book" >
+    <id column="b_id" property="bId" jdbcType="INTEGER" />
+    <result column="b_name" property="bName" jdbcType="VARCHAR" />
+    <result column="b_content" property="bContent" jdbcType="VARCHAR" />
+    <result column="b_image" property="bImage" jdbcType="VARCHAR" />
+    <result column="b_price" property="bPrice" jdbcType="INTEGER" />
+    <result column="b_number" property="bNumber" jdbcType="INTEGER" />
+    <result column="b_date" property="bDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    b_id, b_name, b_content, b_image, b_price, b_number, b_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where b_id = #{bId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from book
+    where b_id = #{bId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.nanfeng.model.po.Book" >
+    insert into book (b_id, b_name, b_content, 
+      b_image, b_price, b_number, 
+      b_date)
+    values (#{bId,jdbcType=INTEGER}, #{bName,jdbcType=VARCHAR}, #{bContent,jdbcType=VARCHAR}, 
+      #{bImage,jdbcType=VARCHAR}, #{bPrice,jdbcType=INTEGER}, #{bNumber,jdbcType=INTEGER}, 
+      #{bDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.nanfeng.model.po.Book" >
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bId != null" >
+        b_id,
+      </if>
+      <if test="bName != null" >
+        b_name,
+      </if>
+      <if test="bContent != null" >
+        b_content,
+      </if>
+      <if test="bImage != null" >
+        b_image,
+      </if>
+      <if test="bPrice != null" >
+        b_price,
+      </if>
+      <if test="bNumber != null" >
+        b_number,
+      </if>
+      <if test="bDate != null" >
+        b_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bId != null" >
+        #{bId,jdbcType=INTEGER},
+      </if>
+      <if test="bName != null" >
+        #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bContent != null" >
+        #{bContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bImage != null" >
+        #{bImage,jdbcType=VARCHAR},
+      </if>
+      <if test="bPrice != null" >
+        #{bPrice,jdbcType=INTEGER},
+      </if>
+      <if test="bNumber != null" >
+        #{bNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bDate != null" >
+        #{bDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.nanfeng.model.po.Book" >
+    update book
+    <set >
+      <if test="bName != null" >
+        b_name = #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bContent != null" >
+        b_content = #{bContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bImage != null" >
+        b_image = #{bImage,jdbcType=VARCHAR},
+      </if>
+      <if test="bPrice != null" >
+        b_price = #{bPrice,jdbcType=INTEGER},
+      </if>
+      <if test="bNumber != null" >
+        b_number = #{bNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bDate != null" >
+        b_date = #{bDate,jdbcType=DATE},
+      </if>
+    </set>
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.nanfeng.model.po.Book" >
+    update book
+    set b_name = #{bName,jdbcType=VARCHAR},
+      b_content = #{bContent,jdbcType=VARCHAR},
+      b_image = #{bImage,jdbcType=VARCHAR},
+      b_price = #{bPrice,jdbcType=INTEGER},
+      b_number = #{bNumber,jdbcType=INTEGER},
+      b_date = #{bDate,jdbcType=DATE}
+    where b_id = #{bId,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectAllBook" resultMap="BaseResultMap">
+        select * from book
+    </select>
+</mapper>

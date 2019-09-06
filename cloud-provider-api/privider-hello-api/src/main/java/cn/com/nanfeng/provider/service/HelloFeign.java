@@ -1,5 +1,6 @@
 package cn.com.nanfeng.provider.service;
 
+import cn.com.nanfeng.provider.service.fallback.HelloFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

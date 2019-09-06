@@ -1,4 +1,4 @@
-package cn.com.nanfeng.provider.service;
+package cn.com.nanfeng.provider.service.fallback;
 
 import cn.com.nanfeng.provider.service.HelloFeign;
 import feign.hystrix.FallbackFactory;
@@ -18,7 +18,7 @@ public class HelloFallback implements FallbackFactory<HelloFeign> {
         return new HelloFeign() {
             @Override
             public String hello() {
-                return null;
+                return "sorry";
             }
         };
     }

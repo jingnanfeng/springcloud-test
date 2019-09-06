@@ -18,8 +18,10 @@
 
     <modules>
         <module>cloud-eureka</module>
+        <module>cloud-zuul</module>
         <module>cloud-provider</module>
         <module>cloud-provider-api</module>
+        <module>cloud-discovery</module>
     </modules>
 
     <properties>
@@ -35,6 +37,8 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>

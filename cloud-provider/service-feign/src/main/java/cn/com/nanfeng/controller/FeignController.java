@@ -1,4 +1,5 @@
 package cn.com.nanfeng.controller;
+import cn.com.nanfeng.provider.service.HelloFeign;
 import cn.com.nanfeng.service.FeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,11 @@ import javax.annotation.Resource;
 public class FeignController {
 
     @Autowired
-    FeignService feignService;
+    HelloFeign helloFeign;
 
 
     @GetMapping("/hello")
     public String hello(){
-        return feignService.hello();
+        return helloFeign.hello();
     }
 }

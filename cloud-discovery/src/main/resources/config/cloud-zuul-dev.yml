@@ -1,0 +1,20 @@
+zuul:
+  routes:
+    ##
+    hello:
+      path: /cloud-hello/**
+      serviceId: privider-hello
+      ribbon:
+        eager-load:
+          enabled: true
+        ConnectTimeout: 36000
+        ReadTimeout: 36000
+    ##
+    feign:
+      path: /cloud-feign/**
+      serviceId: service-feign
+      ribbon:
+        eager-load:
+          enabled: true
+        ConnectTimeout: 36000
+        ReadTimeout: 36000

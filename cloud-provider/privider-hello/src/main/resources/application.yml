@@ -1,11 +1,11 @@
 server:
-  port: 8082
+  port: 8084
 
 spring:
+  profiles:
+    active: dev
   application:
     name: @artifactId@
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8081/eureka
+  datasource:
+    username: root
+    password: root

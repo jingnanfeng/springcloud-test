@@ -3,7 +3,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8081/eureka/
 server:
-  port: 8083
+  port: 8085
 spring:
   application:
     name: @artifactId@
