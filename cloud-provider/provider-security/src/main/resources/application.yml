@@ -1,0 +1,13 @@
+server:
+  port: 8086
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: @artifactId@
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hello?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
