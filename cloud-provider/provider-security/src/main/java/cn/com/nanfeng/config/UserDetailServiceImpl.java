@@ -1,7 +1,9 @@
 package cn.com.nanfeng.config;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author liutao
@@ -34,8 +38,15 @@ public class UserDetailServiceImpl implements UserDetailsService {
         //输出加密后的密码
         logger.info("密码为：{}",user.getPassword());
 
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+        if (StringUtils.equalsIgnoreCase("mrbird",username)){
+            authorityList = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
+        }else {
+            authorityList = AuthorityUtils.commaSeparatedStringToAuthorityList("test");
+        }
+
         return new User(username,user.getPassword(),user.isEnable(),
                 user.isAccountNonExpired(),user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                user.isAccountNonLocked(), authorityList);
     }
 }

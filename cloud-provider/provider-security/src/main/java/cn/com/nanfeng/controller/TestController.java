@@ -1,6 +1,8 @@
 package cn.com.nanfeng.controller;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -40,11 +42,19 @@ public class TestController {
         if (savedRequest != null){
             String targetUrl = savedRequest.getRedirectUrl();
             if (StringUtils.endsWithIgnoreCase(targetUrl,".html")){
-                redirectStrategy.sendRedirect(request,response, "/login2.html");
+                redirectStrategy.sendRedirect(request,response, "/login.html");
             }
         }
         return "访问的资源需要身份认证";
     }
+
+    @GetMapping("/session/invalid")
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public String SessionInvaild(){
+        return "session已经失效，请重新登录";
+    }
+
+
 
     @GetMapping("/login")
     public String login(){
@@ -55,6 +65,19 @@ public class TestController {
     public Object index(Authentication authentication){
         return authentication;
     }
+
+    @GetMapping("/signout/success")
+    public String signout(){
+        return "退出成功，请重新登录";
+    }
+
+    @GetMapping("/auth/admin")
+    @PreAuthorize("hasAuthority('admin')")
+    public String authenticationTest(){
+        return "您拥有admin权限，可以查看";
+    }
+
+
 
 
 

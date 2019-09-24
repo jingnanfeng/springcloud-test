@@ -2,9 +2,12 @@ package cn.com.nanfeng.config;
 
 import cn.com.nanfeng.filter.SmsCodeFilter;
 import cn.com.nanfeng.filter.VaildateCodeFilter;
+import cn.com.nanfeng.handler.MyAuthenticationAccessDeniedHandler;
+import cn.com.nanfeng.handler.MyLogOutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +27,7 @@ import javax.sql.DataSource;
  * @date 2019-09-06 15:32
  */
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
@@ -40,6 +44,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     private SmsCodeFilter smsCodeFilter;
     @Resource
     private SmsAuthenticationConfig smsAuthenticationConfig;
+    @Resource
+    private MySessionExpiredStrategy mySessionExpiredStrategy;
+    @Resource
+    private MyLogOutSuccessHandler myLogOutSuccessHandler;
+    @Resource
+    private MyAuthenticationAccessDeniedHandler myAuthenticationAccessDeniedHandler;
+
 
    /* @Override
     protected void configure(HttpSecurity http) throws Exception{
@@ -63,8 +74,11 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 */
     protected void configure(HttpSecurity http) throws Exception{
-        http.addFilterBefore(vaildateCodeFilter,UsernamePasswordAuthenticationFilter.class)//添加验证码的过滤器
-             .addFilterBefore(smsCodeFilter,UsernamePasswordAuthenticationFilter.class)//短信验证码校验过滤器
+        http.exceptionHandling()
+                .accessDeniedHandler(myAuthenticationAccessDeniedHandler)
+                .and()
+                .addFilterBefore(vaildateCodeFilter,UsernamePasswordAuthenticationFilter.class)//添加验证码的过滤器
+                .addFilterBefore(smsCodeFilter,UsernamePasswordAuthenticationFilter.class)//短信验证码校验过滤器
                 .formLogin()//登录表单
                 .loginPage("/authentication/require")//登录跳转的URL
                 .loginProcessingUrl("/login")//处理表单登录的URL
@@ -73,9 +87,22 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()//授权配置
                 .antMatchers("/authentication/require",
-                        "/login2.html", "/code/image","/code/sms").permitAll()//无需认证的请求路径
+                        "/login.html", "/code/image","/code/sms","/session/invalid").permitAll()//无需认证的请求路径
                 .anyRequest()//所有请求
                 .authenticated()//都需要认证
+                .and()
+                .sessionManagement()//添加session管理
+                .invalidSessionUrl("/session/invalid")//session失效后跳转的链接
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true)
+                .expiredSessionStrategy(mySessionExpiredStrategy)
+                .and()
+                .and()
+                .logout()
+                .logoutUrl("/signout")
+                /*.logoutSuccessUrl("/signout/success")*/
+                .logoutSuccessHandler(myLogOutSuccessHandler)
+                .deleteCookies("JSESSIONID")
                 .and().csrf().disable()
                 .apply(smsAuthenticationConfig);//将短信验证加到Spring Security中
     }
