@@ -16,6 +16,7 @@
         <module>service-feign</module>
         <module>provider-security</module>
         <module>provider-auth</module>
+        <module>provider-oauth2</module>
     </modules>
 
     <dependencies>
