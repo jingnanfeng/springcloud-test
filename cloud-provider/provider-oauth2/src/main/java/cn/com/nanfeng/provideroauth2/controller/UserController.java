@@ -3,7 +3,6 @@ package cn.com.nanfeng.provideroauth2.controller;
 import cn.com.nanfeng.provideroauth2.service.impl.RedisCodeService;
 import cn.com.nanfeng.provideroauth2.smscode.SmsCode;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,5 +43,4 @@ public class UserController {
         String code = RandomStringUtils.randomNumeric(6);
         return new SmsCode(code);
     }
-
 }

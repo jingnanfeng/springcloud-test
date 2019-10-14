@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -37,7 +38,8 @@ public class MyAuthenticationSuccessHandle implements AuthenticationSuccessHandl
     private ClientDetailsService clientDetailsService;
     @Resource
     private AuthorizationServerTokenServices authorizationServerTokenServices;
-
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -58,7 +60,9 @@ public class MyAuthenticationSuccessHandle implements AuthenticationSuccessHandl
             throw new UnapprovedClientAuthenticationException("clientId:"+clientId+"对应的信息不正确");
         }else  if (!StringUtils.equals(clientDetails.getClientSecret(),clientSecret)){
             throw new UnapprovedClientAuthenticationException("clientSecret不正确");
-        }else {
+        }else if (!passwordEncoder.matches(clientSecret,clientDetails.getClientSecret())){
+            throw new UnapprovedClientAuthenticationException("clientSecret不正确");
+        } else {
             //通过TokenRequest构造器生成TokenRequest
             tokenRequest = new TokenRequest(new HashMap<>(),clientId,clientDetails.getScope(),"custom");
         }
