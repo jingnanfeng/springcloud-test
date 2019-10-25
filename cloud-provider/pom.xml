@@ -12,7 +12,7 @@
     <artifactId>cloud-provider</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>privider-hello</module>
+        <module>provider-hello</module>
         <module>service-feign</module>
         <module>provider-security</module>
         <module>provider-auth</module>

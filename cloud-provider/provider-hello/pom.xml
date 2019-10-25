@@ -11,9 +11,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.com.nanfeng</groupId>
-    <artifactId>privider-hello</artifactId>
+    <artifactId>provider-hello</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>privider-hello</name>
+    <name>provider-hello</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
