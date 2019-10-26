@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.nanfeng.mapper.DdUserMapper">
+  <resultMap id="BaseResultMap" type="cn.com.nanfeng.model.po.DdUser">
+    <id column="DD_ID" jdbcType="VARCHAR" property="ddId" />
+    <result column="DD_USERNAME" jdbcType="VARCHAR" property="ddUsername" />
+    <result column="DD_PASSWORD" jdbcType="VARCHAR" property="ddPassword" />
+    <result column="DD_DESC" jdbcType="VARCHAR" property="ddDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DD_ID, DD_USERNAME, DD_PASSWORD, DD_DESC
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from DD_USER
+    where DD_ID = #{ddId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DD_USER
+    where DD_ID = #{ddId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.com.nanfeng.model.po.DdUser">
+    insert into DD_USER (DD_ID, DD_USERNAME, DD_PASSWORD, 
+      DD_DESC)
+    values (#{ddId,jdbcType=VARCHAR}, #{ddUsername,jdbcType=VARCHAR}, #{ddPassword,jdbcType=VARCHAR}, 
+      #{ddDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.nanfeng.model.po.DdUser">
+    insert into DD_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ddId != null">
+        DD_ID,
+      </if>
+      <if test="ddUsername != null">
+        DD_USERNAME,
+      </if>
+      <if test="ddPassword != null">
+        DD_PASSWORD,
+      </if>
+      <if test="ddDesc != null">
+        DD_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ddId != null">
+        #{ddId,jdbcType=VARCHAR},
+      </if>
+      <if test="ddUsername != null">
+        #{ddUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="ddPassword != null">
+        #{ddPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="ddDesc != null">
+        #{ddDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.nanfeng.model.po.DdUser">
+    update DD_USER
+    <set>
+      <if test="ddUsername != null">
+        DD_USERNAME = #{ddUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="ddPassword != null">
+        DD_PASSWORD = #{ddPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="ddDesc != null">
+        DD_DESC = #{ddDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DD_ID = #{ddId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.nanfeng.model.po.DdUser">
+    update DD_USER
+    set DD_USERNAME = #{ddUsername,jdbcType=VARCHAR},
+      DD_PASSWORD = #{ddPassword,jdbcType=VARCHAR},
+      DD_DESC = #{ddDesc,jdbcType=VARCHAR}
+    where DD_ID = #{ddId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    SELECT * FROM DD_USER
+  </select>
+</mapper>

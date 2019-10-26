@@ -30,7 +30,7 @@ public class BookTest {
     public void testBook(){
         List<Book> bookList = bookService.getAllBook();
         for (Book book : bookList) {
-            System.out.println(book.getbName());
+            System.out.println(book.getBName());
         }
     }
 

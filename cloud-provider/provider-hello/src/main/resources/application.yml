@@ -9,3 +9,4 @@ spring:
   datasource:
     username: root
     password: root
+
