@@ -19,9 +19,9 @@ import javax.sql.DataSource;
  * @Description
  * @date 2019-10-26 11:46
  */
-@Configuration
-@MapperScan(basePackages = OracleDataSourcesConfig.PACKAGE,
-        sqlSessionFactoryRef = "oracleSqlSessionFactory")
+//@Configuration
+//@MapperScan(basePackages = OracleDataSourcesConfig.PACKAGE,
+ //       sqlSessionFactoryRef = "oracleSqlSessionFactory")
 public class OracleDataSourcesConfig {
 
     // oracledao扫描路径

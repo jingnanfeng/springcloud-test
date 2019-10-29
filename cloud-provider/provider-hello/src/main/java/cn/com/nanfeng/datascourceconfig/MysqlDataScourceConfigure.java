@@ -20,8 +20,8 @@ import javax.sql.DataSource;
  * @Description
  * @date 2019-10-26 11:44
  */
-@Configuration
-@MapperScan(basePackages = MysqlDataScourceConfigure.PACKAGE, sqlSessionFactoryRef = "mysqlSqlSessionFactory")
+//@Configuration
+//@MapperScan(basePackages = MysqlDataScourceConfigure.PACKAGE, sqlSessionFactoryRef = "mysqlSqlSessionFactory")
 public class MysqlDataScourceConfigure {
     // mysqldao扫描路径
     static final String PACKAGE = "cn.com.nanfeng.maooer";

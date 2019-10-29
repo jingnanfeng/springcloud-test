@@ -26,4 +26,20 @@ public class BookServiceImpl implements IBookService {
         List<Book> bookList = bookMapper.selectAllBook();
         return bookList;
     }
+
+    @Override
+    public Book update(Book book) {
+        bookMapper.updateByPrimaryKey(book);
+        return bookMapper.selectByPrimaryKey(book.getBId());
+    }
+
+    @Override
+    public int deleteBookById(Integer id) {
+        return bookMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Book getBookById(Integer id) {
+        return bookMapper.selectByPrimaryKey(id);
+    }
 }
