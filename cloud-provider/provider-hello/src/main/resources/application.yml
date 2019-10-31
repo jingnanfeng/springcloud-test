@@ -9,4 +9,13 @@ spring:
   datasource:
     username: root
     password: root
-
+  mail:
+    host: smtp.163.com
+    username: liu05265218@163.com
+    password: nanfengbujing123
+    properties:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
+          required: true
