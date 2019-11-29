@@ -4,14 +4,14 @@ eureka:
   instance:
     hostname: localhost
   client:
-    ##设置为false 代表不向注册中心注册自己
+    ##璁剧疆涓篺alse 浠ｈ〃涓嶅悜娉ㄥ唽涓績娉ㄥ唽鑷繁
     register-with-eureka: false
-    ##由于注册中心的职责是维护服务的实例，它并不需要去检索服务，设置为false
+    ##鐢变簬娉ㄥ唽涓績鐨勮亴璐ｆ槸缁存姢鏈嶅姟鐨勫疄渚嬶紝瀹冨苟涓嶉渶瑕佸幓妫�绱㈡湇鍔★紝璁剧疆涓篺alse
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 spring:
   profiles:
-    active: dev
+    active: peer1
   application:
     name: @artifactId@
