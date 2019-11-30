@@ -1,17 +1,42 @@
 server:
-  port: 8086
-  servlet:
-    session:
-      timeout: 3600
-
+  port: 8087
+  accessTokenTimeOut: 1800
+  refreshTokenTimeOut: 2400
 spring:
-  profiles:
-    active: dev
-  application:
-    name: @artifactId@
+  redis:
+    host: 192.168.147.132
+    port: 6379
+    jedis:
+      pool:
+        max-idle: 8
+        max-active: 8
+        max-wait: -1
+        min-idle: 0
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hello?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
-    username: root
-    password: 123456
+    druid:
+      db-type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/hello?characterEncoding=utf8&serverTimezone=UTC
+      username: root
+      password: 123456
+      #初始化大小，最大，最小
+      initial-size: 5
+      min-idle: 5
+      max-wait: 50
+      #配置间隔多久才能进行一次检查，检察院需要关闭的连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      #配置一个连接在池中的最小生存单位，单位是好秒
+      min-evictable-idle-time-millis: 30000
+mybatis:
+  type-aliases-package: cn.com.nanfeng.providersecurity.model.po
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+security:
+  oauth2:
+    client:
+      client-id: nanfeng
+      client-secret: nanfengbujing
+      scope: "*"
+
 
