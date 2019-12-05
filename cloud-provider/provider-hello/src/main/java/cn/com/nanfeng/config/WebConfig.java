@@ -1,3 +1,4 @@
+/*
 package cn.com.nanfeng.config;
 
 import cn.com.nanfeng.filter.TimeFilter;
@@ -13,12 +14,14 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * @author liutao
  * @Title
  * @Description
  * @date 2019-10-31 17:00
- */
+ *//*
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -44,3 +47,4 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 }
+*/

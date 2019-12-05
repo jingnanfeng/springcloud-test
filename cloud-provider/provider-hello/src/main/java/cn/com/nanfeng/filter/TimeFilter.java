@@ -1,3 +1,4 @@
+/*
 package cn.com.nanfeng.filter;
 
 import org.slf4j.Logger;
@@ -9,14 +10,18 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 import java.util.Date;
 
+*/
 /**
  * @author liutao
  * @Title
  * @Description
  * @date 2019-10-31 15:44
- */
+ *//*
+
+*/
 /*@Component
-@WebFilter(urlPatterns = {"/*"})*/
+@WebFilter(urlPatterns = {"/*"})*//*
+
 public class TimeFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(TimeFilter.class);
@@ -40,3 +45,4 @@ public class TimeFilter implements Filter {
         logger.info("过滤器销毁");
     }
 }
+*/

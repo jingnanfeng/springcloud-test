@@ -5,8 +5,9 @@ eureka:
 spring:
   cloud:
     config:
-      fail-fast: true
+#      fail-fast: true
       discovery:
         service-id: cloud-discovery
         enabled: true
-      profile: ${spring.profiles.active}
+      label: master
+      profile: dev

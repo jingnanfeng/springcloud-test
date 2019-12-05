@@ -11,7 +11,5 @@ eureka:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 spring:
-  profiles:
-    active: peer1
   application:
     name: @artifactId@
