@@ -1,0 +1,9 @@
+server:
+  port: 8100
+spring:
+  application:
+    name: @artifactId@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/

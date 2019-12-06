@@ -1,20 +1,17 @@
-package cn.com.nanfeng.cloudzuul;
+package cn.com.nanfeng.cloudgateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableZuulProxy
-@EnableFeignClients
 @EnableDiscoveryClient
-public class CloudZuulApplication {
+@EnableEurekaClient
+public class CloudGatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CloudZuulApplication.class, args);
+        SpringApplication.run(CloudGatewayApplication.class, args);
     }
 
 }

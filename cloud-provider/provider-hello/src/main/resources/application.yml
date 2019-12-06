@@ -29,6 +29,8 @@ spring:
       enabled: true
       trace:
         enabled: true
+  zipkin:
+    base-url: http://localhost:8100
 management:
   endpoints:
     web:

@@ -1,0 +1,30 @@
+server:
+  port: 8083
+spring:
+  profiles:
+    active: dev
+  application:
+    name: @artifactId@
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          #服务名小写
+          lower-case-service-id: true
+      routes:
+      - id: hello
+        #重点！/info必须使用http进行转发，lb代表从注册中心获取服务
+        uri: lb://PROVider-hello
+        predicates:
+        #重点！转发该路径！/demo/**
+          - Path=/demo/**
+        #http://localhost:8080/demo/test/2,必须加上StripPrefix=1
+        #否则访问服务时会带上userapi,而不是我们期望的去掉userapi，只保留**部分
+        filters:
+          - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/

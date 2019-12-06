@@ -18,7 +18,7 @@
 
     <modules>
         <module>cloud-eureka</module>
-        <module>cloud-zuul</module>
+        <module>cloud-gateway</module>
         <module>cloud-provider</module>
         <module>cloud-provider-api</module>
         <module>cloud-discovery</module>
