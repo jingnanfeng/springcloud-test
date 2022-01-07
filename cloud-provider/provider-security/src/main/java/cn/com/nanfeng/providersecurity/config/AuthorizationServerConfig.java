@@ -52,6 +52,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private ObjectMapper objectMapper;
     @Resource
     private AuthenticationManager authenticationManager;
+    @Resource
+    private PasswordEncoder passwordEncoder;
+    @Resource
+    private CustomUserDetailService customUserDetailService;
 
 
     @Value("${server.accessTokenTimeOut}")
@@ -74,11 +78,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
          */
         clients.inMemory()
                 .withClient(properties.getClientId())
-                .secret(new MyPasswordEncoder().encode(properties.getClientSecret()))
+                .secret(passwordEncoder.encode(properties.getClientSecret()))
                 .scopes(properties.getScope())
                 //支持的授权模式，共四种，这里配置了三种
-                .authorizedGrantTypes("refresh_token","password","authorization_code","client_credentials","implicit")
-                .refreshTokenValiditySeconds(refreshTokenTimeOut);//超时时间
+                .authorizedGrantTypes("refresh_token","password")
+                //超时时间
+                .refreshTokenValiditySeconds(refreshTokenTimeOut);
     }
 
     @Override
@@ -94,7 +99,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //身份认证管理器，主要用于“password”模式
                 .authenticationManager(authenticationManager)
                 //配合认证身份管理器，检查用户名密码是有效
-                .userDetailsService(userDetailsService());
+                .userDetailsService(customUserDetailService);
     }
 
     @Override
@@ -104,7 +109,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
          */
         security
                 .allowFormAuthenticationForClients()
-                .tokenKeyAccess("isAuthenticated()")
+                .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("permitAll()");
     }
 
@@ -117,19 +122,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new RedisTokenStore(redisConnectionFactory);
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new MyPasswordEncoder();
-    }
-
-    /**
-     * 获取表中用户信息
-     * @return
-     */
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new CustomUserDetailService();
-    }
 
     /**
      * token存储方式

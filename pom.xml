@@ -22,6 +22,7 @@
         <module>cloud-provider</module>
         <module>cloud-provider-api</module>
         <module>cloud-discovery</module>
+        <module>cloud-stream</module>
     </modules>
 
     <properties>

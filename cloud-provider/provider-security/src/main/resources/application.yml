@@ -5,7 +5,7 @@ server:
 spring:
   redis:
     host: 192.168.147.132
-    port: 6379
+    port: 6389
     jedis:
       pool:
         max-idle: 8

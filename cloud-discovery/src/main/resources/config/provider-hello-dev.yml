@@ -1,4 +1,4 @@
-server:
+sserver:
   port: 8064
 
 spring:

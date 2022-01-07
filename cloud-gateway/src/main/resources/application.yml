@@ -10,20 +10,25 @@ spring:
       discovery:
         locator:
           enabled: true
-          #·şÎñÃûĞ¡Ğ´
+          #æœåŠ¡åå°å†™
           lower-case-service-id: true
       routes:
-      - id: hello
-        #ÖØµã£¡/info±ØĞëÊ¹ÓÃhttp½øĞĞ×ª·¢£¬lb´ú±í´Ó×¢²áÖĞĞÄ»ñÈ¡·şÎñ
-        uri: lb://PROVider-hello
-        predicates:
-        #ÖØµã£¡×ª·¢¸ÃÂ·¾¶£¡/demo/**
-          - Path=/demo/**
-        #http://localhost:8080/demo/test/2,±ØĞë¼ÓÉÏStripPrefix=1
-        #·ñÔò·ÃÎÊ·şÎñÊ±»á´øÉÏuserapi,¶ø²»ÊÇÎÒÃÇÆÚÍûµÄÈ¥µôuserapi£¬Ö»±£Áô**²¿·Ö
-        filters:
-          - StripPrefix=1
-
+        - id: hello
+          #é‡ç‚¹ï¼/infoå¿…é¡»ä½¿ç”¨httpè¿›è¡Œè½¬å‘ï¼Œlbä»£è¡¨ä»æ³¨å†Œä¸­å¿ƒè·å–æœåŠ¡
+          uri: lb://PROVIDER-HELLO
+          predicates:
+            #é‡ç‚¹ï¼è½¬å‘è¯¥è·¯å¾„ï¼/demo/**
+            - Path=/hello/**
+          #http://localhost:8080/demo/test/2,å¿…é¡»åŠ ä¸ŠStripPrefix=1
+          #å¦åˆ™è®¿é—®æœåŠ¡æ—¶ä¼šå¸¦ä¸Šuserapi,è€Œä¸æ˜¯æˆ‘ä»¬æœŸæœ›çš„å»æ‰userapiï¼Œåªä¿ç•™**éƒ¨åˆ†
+          filters:
+            - StripPrefix=1
+        - id: feign
+          uri: lb:/SERVICE-FEIGN
+          predicates:
+            - Path=/feign/**
+          filters:
+            - StripPrefix=1
 eureka:
   client:
     service-url:

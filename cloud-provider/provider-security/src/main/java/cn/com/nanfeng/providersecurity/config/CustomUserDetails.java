@@ -2,7 +2,9 @@ package cn.com.nanfeng.providersecurity.config;
 
 import cn.com.nanfeng.providersecurity.model.vo.UserToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,8 +37,9 @@ public class CustomUserDetails implements UserDetails,Serializable {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){
         //构建角色集合
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        return authorityList;
+//        List<GrantedAuthority> authorityList = new ArrayList<>();
+//        return authorityList;
+        return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
     }
 
     /**
